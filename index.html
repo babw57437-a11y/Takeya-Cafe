@@ -1,0 +1,278 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>التكية | Cafe</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <span>☕</span>
+            <div>
+                <h1>التكية</h1>
+                <p>TAKEYA CAFE</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#home">الرئيسية</a>
+            <a href="#menu">المنيو</a>
+            <a href="#about">عن التكية</a>
+            <a href="#contact">تواصل معنا</a>
+        </nav>
+
+        <button class="cart-btn" onclick="openCart()">
+            🛒 السلة
+            <span id="cartCount">0</span>
+        </button>
+    </header>
+
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <span class="hero-small">☕ أهلاً بيكم في</span>
+
+            <h2>
+                التكية
+                <span>كافيه</span>
+            </h2>
+
+            <p>
+                قهوتك المفضلة، مشروباتك الباردة،
+                وأحلى السناكس في مكان واحد.
+            </p>
+
+            <a href="#menu" class="hero-btn">
+                شوف المنيو
+            </a>
+
+        </div>
+
+        <div class="hero-coffee">
+            ☕
+        </div>
+
+    </section>
+
+
+    <!-- Menu -->
+    <section class="menu-section" id="menu">
+
+        <div class="section-title">
+            <span>TAKEYA MENU</span>
+            <h2>المنيو</h2>
+            <p>اختار اللي على مزاجك واستمتع بطلبك ❤️</p>
+        </div>
+
+
+        <!-- Categories -->
+        <div class="categories">
+
+            <button class="category active" onclick="filterMenu('all', this)">
+                الكل
+            </button>
+
+            <button class="category" onclick="filterMenu('hot', this)">
+                ☕ مشروبات ساخنة
+            </button>
+
+            <button class="category" onclick="filterMenu('cold', this)">
+                🧊 مشروبات باردة
+            </button>
+
+            <button class="category" onclick="filterMenu('fresh', this)">
+                🍹 عصائر وفريش
+            </button>
+
+            <button class="category" onclick="filterMenu('snacks', this)">
+                🥐 فطار وسناكس
+            </button>
+
+            <button class="category" onclick="filterMenu('sandwiches', this)">
+                🥪 ساندوتشات
+            </button>
+
+        </div>
+
+
+        <!-- Search -->
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 دور على حاجة بتحبها..."
+                oninput="searchMenu()"
+            >
+        </div>
+
+
+        <!-- Products -->
+        <div class="products" id="productsContainer"></div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="about" id="about">
+
+        <div class="about-content">
+
+            <span>ABOUT TAKEYA</span>
+
+            <h2>التكية مش مجرد كافيه ☕</h2>
+
+            <p>
+                في التكية بنهتم بكل تفصيلة،
+                من أول اختيار البن والمكونات
+                لحد اللحظة اللي تستمتع فيها بطلبك.
+            </p>
+
+            <p>
+                مكان بسيط، قهوة حلوة،
+                وأجواء تخليك دايمًا عايز ترجع تاني.
+            </p>
+
+        </div>
+
+        <div class="about-icon">
+            ☕
+        </div>
+
+    </section>
+
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+
+        <div class="section-title">
+            <span>CONTACT US</span>
+            <h2>تواصل معانا</h2>
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+                📍
+                <h3>العنوان</h3>
+                <p>اسيوط الجديدة</p>
+            </div>
+
+            <div class="contact-card">
+                📞
+                <h3>التليفون</h3>
+                <p>+201019541571</p>
+            </div>
+
+            <div class="contact-card">
+                🕐
+                <h3>مواعيدنا</h3>
+                <p>من 4 ظهرا حتى 3 منتصف الليل</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Cart -->
+    <div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+    <aside class="cart" id="cart">
+
+        <div class="cart-header">
+            <h2>🛒 طلبك</h2>
+            <button onclick="closeCart()">×</button>
+        </div>
+
+        <div id="cartItems" class="cart-items"></div>
+
+        <div class="cart-footer">
+
+            <div class="total">
+                <span>الإجمالي</span>
+                <strong id="cartTotal">0 ج</strong>
+            </div>
+
+            <button class="checkout-btn" onclick="checkout()">
+                تأكيد الطلب
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Order Modal -->
+    <div class="modal-overlay" id="orderModal">
+
+        <div class="order-modal">
+
+            <button class="close-modal" onclick="closeOrderModal()">×</button>
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>تم استلام طلبك ❤️</h2>
+
+            <p>
+                شكرًا لاختيارك التكية.
+                طلبك حاليًا قيد التحضير.
+            </p>
+
+            <div class="order-status">
+
+                <div class="status active">
+                    <span>✓</span>
+                    <p>تم الطلب</p>
+                </div>
+
+                <div class="line"></div>
+
+                <div class="status">
+                    <span>2</span>
+                    <p>قيد التحضير</p>
+                </div>
+
+                <div class="line"></div>
+
+                <div class="status">
+                    <span>3</span>
+                    <p>جاهز</p>
+                </div>
+
+            </div>
+
+            <button class="continue-btn" onclick="closeOrderModal()">
+                تمام ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        <p>© 2026 التكية Cafe — كل الحقوق محفوظة</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
